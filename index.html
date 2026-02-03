@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>YUGEN COMMUNITY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;color:#e6d3b1;background:#1a120b;overflow-x:hidden;}
+#particles-js{position:fixed;inset:0;z-index:-1;background:#3c2a21;}
+
+/* LOADING */
+#loading{position:fixed;inset:0;background:#3c2a21;z-index:9999;display:flex;justify-content:center;align-items:center;flex-direction:column;}
+.loading-bar{width:300px;height:12px;background:#1a120b;border-radius:10px;overflow:hidden;margin-top:20px;}
+.loading-progress{width:0%;height:100%;background:linear-gradient(90deg,#c9a46a,#f0d9b1);border-radius:10px;}
+
+/* SECTIONS */
+section{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:120px 40px;align-items:center;}
+section h3{font-family:'Playfair Display';font-size:36px;color:#c9a46a;margin-bottom:20px;text-shadow:0 0 8px #000;}
+section p{line-height:1.8;margin-bottom:15px;}
+section img{width:100%;border-radius:18px;box-shadow:0 0 30px #000;transition:0.3s;}
+section img:hover{transform:scale(1.05);}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(90px);transition:1s ease;}
+.reveal.active{opacity:1;transform:translateY(0);}
+
+/* BOX */
+.box{background:rgba(0,0,0,.45);padding:25px;border-left:4px solid #c9a46a;margin-bottom:20px;transition:0.3s;}
+.box:hover{transform:translateY(-5px);background:rgba(0,0,0,.6);}
+
+/* FORM */
+input,textarea,button{width:100%;padding:14px;margin:6px 0;border:none;border-radius:10px;background:rgba(0,0,0,0.45);color:#e6d3b1;}
+button{background:#c9a46a;color:#1a120b;font-weight:600;cursor:pointer;transition:0.3s;}
+button:hover{background:#f0d9b1;color:#1a120b;}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;}
+.gallery img{cursor:pointer;transition:0.3s;}
+.gallery img:hover{transform:scale(1.05);}
+
+/* TIMELINE */
+.timeline-horizontal{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;margin-top:40px;position:relative;}
+.timeline-horizontal::before{content:'';position:absolute;top:25px;left:0;right:0;height:4px;background:#c9a46a;z-index:0;}
+.timeline-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;flex:1;text-align:center;margin-bottom:30px;}
+.step-circle{width:50px;height:50px;background:#c9a46a;border-radius:50%;display:flex;justify-content:center;align-items:center;color:#1a120b;font-weight:700;margin-bottom:10px;box-shadow:0 0 10px #000;}
+.step-content{background:rgba(0,0,0,0.45);padding:15px;border-radius:10px;box-shadow:0 0 15px #000;max-width:180px;transition:0.3s;}
+.step-content:hover{transform:translateY(-10px);background:rgba(0,0,0,0.6);}
+
+/* FOOTER */
+footer{background:#1a120b;padding:40px;color:#c9a46a;text-align:center;}
+footer a{color:#f0d9b1;margin:0 8px;text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+
+/* NAVBAR */
+nav{position:fixed;top:0;width:100%;background:rgba(26,18,11,0.85);color:#c9a46a;display:flex;justify-content:space-between;align-items:center;padding:15px 20px;z-index:1000;font-family:'Playfair Display';box-shadow:0 0 20px #c9a46a;}
+nav ul{list-style:none;display:flex;gap:15px;}
+nav ul li{cursor:pointer;transition:0.3s;}
+nav ul li:hover{color:#f0d9b1;transform:translateY(-2px);}
+
+/* HERO */
+.hero{min-height:100vh;padding:0 20px;display:flex;flex-wrap:wrap;align-items:center;gap:30px;position:relative;z-index:1;}
+.hero h1{font-family:'Playfair Display';font-size:48px;color:#c9a46a;text-shadow:0 0 10px #f0d9b1;}
+.hero p{font-size:18px;color:#e6d3b1;text-shadow:0 0 6px #000;max-width:400px;}
+.logo-circle{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#3c2a21,#000);display:flex;justify-content:center;align-items:center;box-shadow:0 0 50px #000,inset 0 0 40px #c9a46a;margin-left:auto;}
+.logo-circle img{width:65%;border-radius:50%;}
+
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:9999;}
+#lightbox img{max-width:90%;max-height:90%;}
+
+/* MEDIA */
+@media(max-width:900px){
+  .hero,section{grid-template-columns:1fr;text-align:center;}
+  .logo-circle{width:200px;height:200px;margin-left:auto;margin-right:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING PAGE -->
+<div id="loading">
+  <div id="particles-loading" style="position:absolute;inset:0;"></div>
+  <h1 style="font-family:'Playfair Display';font-size:48px;color:#c9a46a;text-shadow:0 0 15px #000;">YUGEN COMMUNITY</h1>
+  <div class="loading-bar"><div class="loading-progress"></div></div>
+</div>
+
+<!-- PARTICLES -->
+<div id="particles-js"></div>
+
+<!-- NAVBAR -->
+<nav>
+<div>YUGEN COMMUNITY</div>
+<ul>
+<li onclick="scrollToSection('about')">About</li>
+<li onclick="scrollToSection('philosophy')">Philosophy</li>
+<li onclick="scrollToSection('values')">Values</li>
+<li onclick="scrollToSection('journey')">Journey</li>
+<li onclick="scrollToSection('process')">Process</li>
+<li onclick="scrollToSection('future')">Future</li>
+<li onclick="scrollToSection('gallery')">Gallery</li>
+<li onclick="scrollToSection('contact')">Contact</li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+<div>
+<h1>YUGEN COMMUNITY</h1>
+<p>Cinematic Cosplay, Immortal Mode, Legendary Level</p>
+</div>
+<div class="logo-circle">
+<img src="https://i.imgur.com/6VBx3io.png" alt="Logo">
+</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+<div>
+<h3>ABOUT YUGEN</h3>
+<p>YUGEN Community adalah rumah bagi cosplayer dengan seni dan makna terdalam.</p>
+<p>Kami memadukan keindahan visual dan cerita karakter untuk pengalaman cosplay luar biasa.</p>
+<p>Setiap anggota adalah bagian dari cerita besar YUGEN.</p>
+</div>
+<img src="https://picsum.photos/800/600?1">
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="reveal">
+<img src="https://picsum.photos/800/600?2">
+<div>
+<h3>PHILOSOPHY OF YUGEN</h3>
+<p>Keindahan tersembunyi, elegan, namun membekas dalam jiwa.</p>
+<p>Kami menghargai detail kecil yang menciptakan kesempurnaan.</p>
+</div>
+</section>
+
+<!-- VALUES -->
+<section id="values" class="reveal">
+<div>
+<h3>COMMUNITY VALUES</h3>
+<div class="box">Respect di atas segalanya</div>
+<div class="box">Seni lebih penting dari ego</div>
+<div class="box">Berkembang bersama</div>
+<div class="box">Dukung kreatifitas anggota</div>
+</div>
+<img src="https://picsum.photos/800/600?3">
+</section>
+
+<!-- OUR JOURNEY -->
+<section id="journey" class="reveal" style="grid-column:1/-1;">
+<h3>OUR JOURNEY</h3>
+<div class="timeline-horizontal">
+  <div class="timeline-step">
+    <div class="step-circle">1</div>
+    <div class="step-content">
+      <h4>Awal Komunitas</h4>
+      <p>Dimulai dari pertemuan kecil para cosplayer berbakat.</p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="step-circle">2</div>
+    <div class="step-content">
+      <h4>Workshop Pertama</h4>
+      <p>Mengadakan workshop cosplay pertama skala lokal.</p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="step-circle">3</div>
+    <div class="step-content">
+      <h4>Event Skala Besar</h4>
+      <p>Menjadi host event cosplay regional dengan tema unik.</p>
+    </div>
+  </div>
+  <div class="timeline-step">
+    <div class="step-circle">4</div>
+    <div class="step-content">
+      <h4>Komunitas Solid</h4>
+      <p>YUGEN berkembang menjadi komunitas yang dihormati dan solid.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="reveal">
+<div>
+<h3>COSPLAY CREATION PROCESS</h3>
+<p>Riset karakter → Kostum → Pose & ekspresi → Pemotretan.</p>
+<p>Proses adalah inti kesempurnaan.</p>
+</div>
+<img src="https://picsum.photos/800/600?5">
+</section>
+
+<!-- FUTURE -->
+<section id="future" class="reveal">
+<img src="https://picsum.photos/800/600?6">
+<div>
+<h3>VISION & FUTURE</h3>
+<p>Membangun YUGEN sebagai rumah panjang bagi cosplayer berbakat.</p>
+<p>Workshop, kolaborasi, dan pameran akan menjadi fokus kami.</p>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="reveal">
+<div>
+<h3>GALLERY</h3>
+<div class="gallery">
+<img src="https://picsum.photos/400/400?7" onclick="openLightbox(this.src)">
+<img src="https://picsum.photos/400/400?8" onclick="openLightbox(this.src)">
+<img src="https://picsum.photos/400/400?9" onclick="openLightbox(this.src)">
+<img src="https://picsum.photos/400/400?10" onclick="openLightbox(this.src)">
+</div>
+</div>
+<img src="https://picsum.photos/800/600?11">
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="this.style.display='none'">
+<img id="lightboxImg">
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+<div style="display:flex;flex-direction:column;gap:25px;">
+<h3>CONTACT US</h3>
+<p>Hubungi kami untuk bergabung atau pertanyaan seputar komunitas.</p>
+<form action="https://formsubmit.co/bratavistan@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:15px;">
+<input type="text" name="name" placeholder="Nama" required>
+<input type="email" name="email" placeholder="Email" required>
+<textarea name="message" rows="4" placeholder="Pesan" required></textarea>
+<button type="submit">KIRIM PESAN</button>
+</form>
+</div>
+<img src="https://picsum.photos/800/600?12" style="margin-top:40px;border-radius:18px;box-shadow:0 0 30px #000;">
+</section>
+
+<!-- FOOTER -->
+<footer class="reveal">
+<p>&copy; 2026 YUGEN COMMUNITY. All rights reserved.</p>
+<p>Follow us: 
+<a href="#">Instagram</a> | 
+<a href="#">Twitter</a> | 
+<a href="#">Discord</a>
+</p>
+</footer>
+
+<script>
+// LOADING PAGE
+let progress=0;
+const progressBar=document.querySelector(".loading-progress");
+const loading=document.getElementById("loading");
+const interval=setInterval(()=>{
+  progress+=1;
+  progressBar.style.width=progress+"%";
+  if(progress>=100){
+    clearInterval(interval);
+    loading.style.transition="opacity 0.8s ease";
+    loading.style.opacity=0;
+    setTimeout(()=>loading.style.display="none",800);
+  }
+},30);
+
+// SCROLL REVEAL
+window.addEventListener("scroll",()=>{document.querySelectorAll(".reveal").forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-120){el.classList.add("active")}});});
+
+// LIGHTBOX
+function openLightbox(src){document.getElementById('lightbox').style.display='flex';document.getElementById('lightboxImg').src=src;}
+
+// SCROLL TO SECTION
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"});}
+
+// PARTICLES
+particlesJS("particles-js",{particles:{number:{value:80},color:{value:"#c9a46a"},opacity:{value:0.55},size:{value:4},move:{speed:1.2}},interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"repulse"}}}});
+particlesJS("particles-loading",{particles:{number:{value:60},color:{value:"#f0d9b1"},opacity:{value:0.6},size:{value:3},move:{enable:true,speed:1.5,direction:"none",random:true}}});
+</script>
+</body>
+</html>
